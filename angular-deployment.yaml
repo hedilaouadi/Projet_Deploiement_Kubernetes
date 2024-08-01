@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: angular-front-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: angular-front
+  template:
+    metadata:
+      labels:
+        app: angular-front
+    spec:
+      containers:
+      - name: angular-front
+        image: hedilinux/angularfront:latest
+        ports:
+        - containerPort: 80
+

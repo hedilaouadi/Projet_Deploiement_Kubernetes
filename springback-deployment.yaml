@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springback-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: springback
+  template:
+    metadata:
+      labels:
+        app: springback
+    spec:
+      containers:
+      - name: springback
+        image: hedilinux/springback:latest
+        ports:
+        - containerPort: 8085
+        env:
+        - name: SPRING_DATASOURCE_URL
+          value: "jdbc:mysql://mysql:3306/MindMingledb?autoReconnect=true&failoverReadOnly=false&maxReconnects=10"
+        - name: SPRING_DATASOURCE_USERNAME
+          value: "root"
+        - name: SPRING_DATASOURCE_PASSWORD
+          value: "root"  # Assurez-vous que c'est correct ou ajoutez un mot de passe si nécessaire
+        imagePullPolicy: IfNotPresent
+
+
+
